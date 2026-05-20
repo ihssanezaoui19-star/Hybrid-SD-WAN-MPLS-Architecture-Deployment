@@ -28,7 +28,7 @@
 
 ---
 
-## 🏗️ Infrastructure Deployed
+##  Infrastructure Deployed
 
 ### Components
 
@@ -217,6 +217,6 @@ config firewall policy
 
 ---
 
-## ⚠️ Disclaimer
+##  Disclaimer
 
 This project was conducted in a **virtualized academic environment (EVE-NG)** for educational purposes only. It does not represent a production deployment. All configurations are for learning purposes within the context of the WAN Technologies module at ENSA Kénitra.

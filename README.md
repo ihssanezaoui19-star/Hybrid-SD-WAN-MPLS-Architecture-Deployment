@@ -1,29 +1,33 @@
 # Architecture WAN hybride MPLS et SD-WAN
 
-**Projet académique réalisé en binôme à l'ENSA Kénitra (2024–2025)** avec Chaima El-Achouri et Ihssane Zaoui, dans le module Technologies de réseaux WAN. Maquette EVE-NG, sans déploiement en entreprise.
+**Projet académique en binôme à l'ENSA Kénitra (2024–2025), avec Chaima El-Achouri et Ihssane Zaoui.** Nous avons construit une maquette multi-sites dans EVE-NG. Aucun équipement d'entreprise ou réseau opérateur réel n'a été modifié.
+
+## But du projet
+
+Étudier comment relier un site central et trois sites distants au moyen d'un transport MPLS et d'un chemin Internet, avec routage, tunnels IPsec et politiques SD-WAN. Le secours en cas de panne était un **objectif d'architecture** à tester, pas un résultat de disponibilité mesuré.
 
 ## Problématique
 
-Comment préparer une migration multi-sites où le MPLS reste disponible pour les flux prioritaires tandis qu'un lien Internet et une couche SD-WAN offrent un second chemin ? Le défi est d'articuler routage, isolation des sites et tunnels, puis de vérifier la connectivité avant de conclure à une éventuelle haute disponibilité.
+Un seul chemin WAN peut rendre les sites indisponibles lorsqu'il tombe. Ajouter un second lien ne suffit pas : il faut configurer les routes, les tunnels et les règles du pare-feu, puis vérifier quel chemin porte réellement le trafic. Comment assembler ces couches dans une maquette et distinguer connectivité de base et basculement validé ?
 
-## Ce que nous avons fait
+## Ce que nous avons fait et pourquoi
 
-| Étape | Travail décrit dans le rapport | Preuve ou résultat disponible |
+| Travail du rapport | Pourquoi | Preuve disponible |
 | --- | --- | --- |
-| Concevoir | Sites hub/spoke, quatre pare-feux FortiGate, quatre routeurs virtuels Cisco et postes VPC sur EVE-NG | Topologie et plan de laboratoire |
-| Configurer le transport | Interfaces, cœur MPLS/LDP et commandes BGP sur les routeurs ; zone SD-WAN sur les FortiGate | Extraits de configuration et capture de la zone SD-WAN |
-| Préparer les tunnels | Configurations IPsec `VPN-INET` et `VPN-MPLS`, interfaces et phases 1/2 | Captures de paramètres ; pas de métrique de disponibilité jointe |
-| Tester | Tests ICMP entre postes, passerelles et routeurs de la maquette | Captures de réponses ping dans le rapport |
+| Topologie hub/spoke sur EVE-NG, quatre FortiGate, quatre routeurs virtuels Cisco et des postes VPC | Reproduire les sites et les deux chemins de transport | Schéma et captures de laboratoire |
+| Interfaces, MPLS/LDP et configuration BGP sur les routeurs | Acheminer les préfixes requis entre les réseaux de test | Extraits de configuration |
+| Zone SD-WAN, membres et politiques sur les FortiGate | Préparer une sélection des liaisons selon les besoins | Capture de configuration de la zone |
+| Tunnels IPsec `VPN-INET` et `VPN-MPLS` avec phases 1 et 2 | Préparer la protection et l'interconnexion des sites | Captures de paramètres, sans mesure de stabilité |
+| Vérifications ICMP entre postes, passerelles et routeurs | Confirmer une partie des chemins avant des essais plus exigeants | Réponses ping capturées dans le rapport |
 
-![Extrait recadré de la configuration d'une zone SD-WAN](images/capture-zone-sdwan.png)
+![Schéma public simplifié de la maquette](images/topologie-anonymisee.svg)
 
 ## Résultat et limites
 
-Le rapport montre une **topologie configurée et des échanges ICMP réussis sur les segments testés**. Il décrit une politique de secours envisagée entre MPLS et Internet, mais ne fournit pas de campagne reproductible de panne/basculement, de temps de convergence ni de mesure applicative. La haute disponibilité est donc **l'objectif d'architecture**, pas une performance démontrée. OSPF est expliqué dans l'état de l'art ; les extraits disponibles ne suffisent pas à confirmer sa configuration effective sur tous les équipements.
+La topologie, ses principales configurations et **des échanges ICMP réussis sur les cibles testées** sont documentés. Le rapport ne donne ni séquence reproductible de coupure d'un lien, ni temps de convergence, ni mesure d'une application entre tous les sites : je ne présente donc pas une haute disponibilité démontrée. OSPF est décrit dans l'état de l'art, mais son déploiement complet n'est pas confirmé par les extraits accessibles.
 
-## Documentation
+![Capture recadrée de la zone SD-WAN](images/capture-zone-sdwan.png)
 
-- [Méthodologie pas à pas, contrôles et suites à valider](METHODOLOGIE.md)
-- [Schéma simplifié de la maquette](images/topologie-anonymisee.svg)
+[Lire la méthodologie : construction, contrôles effectués et tests de bascule à mener](METHODOLOGIE.md).
 
-Le rapport académique d'origine reste dans ce dépôt. Il contient un plan d'adressage et un exemple de clé de laboratoire ; les extraits de cette présentation retirent ces paramètres. **Les propositions cryptographiques de cette maquette ne sont pas un modèle de production.**
+**Confidentialité :** le PDF académique d'origine reste dans ce dépôt et comporte un plan d'adressage et une clé de laboratoire. Les nouveaux extraits ne reprennent pas ces valeurs ; les propositions cryptographiques du TP ne doivent pas être reprises en production.

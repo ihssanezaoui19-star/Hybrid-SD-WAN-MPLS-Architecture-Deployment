@@ -1,47 +1,63 @@
-# Méthodologie — WAN hybride MPLS et SD-WAN
+# Méthodologie — maquette WAN hybride MPLS et SD-WAN
 
-> Travail académique en binôme dans EVE-NG. Ce document distingue les configurations vérifiées des objectifs. Les adresses et secrets de la maquette ne sont pas reproduits.
+> Projet académique réalisé en binôme dans EVE-NG. Les configurations et captures proviennent du rapport ; le document sépare étapes configurées, premiers tests ICMP et basculement encore à démontrer. Adresses et clé du laboratoire ne sont pas reprises.
 
-## 1. Poser la question et le périmètre
+## 1. Définir le besoin multi-sites
 
-Une interconnexion dépendante d'un seul transport peut perdre l'accès aux ressources d'un autre site lors d'une panne. Le projet étudie une migration vers deux chemins, MPLS et Internet, avec sélection via FortiGate et tunnels IPsec. Le périmètre est virtuel ; les coûts opérateur et garanties de service ne sont pas mesurés.
+**Ce que nous cherchions :** relier un site central et trois sites distants avec deux chemins envisageables, MPLS et Internet, tout en protégeant les échanges. Le transport MPLS devait rester utile pour les flux prioritaires et la couche SD-WAN devait permettre de sélectionner un chemin selon l'état et la politique des liens.
 
-## 2. Étudier les composants
+**Pourquoi :** un second lien n'apporte rien si les routes, politiques ou tunnels empêchent son utilisation. Les coûts opérateur, SLA et performances réelles n'étaient pas étudiés dans cette maquette.
 
-Le rapport examine MPLS (transport et LDP), SD-WAN (membres, politiques, état des liens), BGP et OSPF, puis retient EVE-NG pour simuler les sites. Une notion expliquée dans l'étude ne signifie pas que chaque commande a été vérifiée en fonctionnement.
+## 2. Étudier les technologies avant de construire
 
-## 3. Dessiner le hub et les spokes
+Le rapport compare MPLS, LDP, SD-WAN, tunnels IPsec et routage dynamique ; il décrit BGP et OSPF dans l'état de l'art. Nous avons retenu EVE-NG pour réunir routeurs, FortiGate et postes de test dans une topologie reproductible.
 
-Le hub et trois sites distants sont représentés avec quatre FortiGate, quatre routeurs vIOS et des VPC. Les transports sont distingués des réseaux locaux et des tunnels. Le schéma public retire interfaces et adresses exactes.
+**Pourquoi :** séparer le transport, le routage et les politiques de sélection des liens permet de diagnostiquer une panne couche par couche. OSPF expliqué dans l'étude ne prouve pas son déploiement complet sur les équipements du projet.
+
+## 3. Dessiner puis monter la topologie EVE-NG
+
+**Réalisé :** représenter un hub, trois sites distants, quatre pare-feux FortiGate, quatre routeurs Cisco virtuels et des VPC. Les segments locaux, liaisons de transport et tunnels ont des fonctions distinctes dans le dessin.
+
+**Pourquoi :** il faut savoir à quel équipement appartient chaque rôle pour comparer un trajet prévu à un trajet réellement testé. Le schéma public supprime adresses, interfaces exactes et identifiants.
 
 ![Topologie simplifiée et anonymisée](images/topologie-anonymisee.svg)
 
-## 4. Configurer le transport sur les routeurs
+## 4. Préparer les routeurs et le transport
 
-Les captures montrent la configuration d'interfaces, de commandes MPLS/LDP et de voisinage BGP. Le contrôle attendu est que les interfaces et les routes nécessaires soient présentes avant d'ajouter les tunnels. Le rapport décrit OSPF dans l'état de l'art, sans démontrer son déploiement complet sur la topologie.
+**Réalisé dans les extraits du rapport :** configurer les interfaces des routeurs, les éléments MPLS/LDP et des paramètres de voisinage BGP. Ces étapes établissent les bases du chemin de transport et de l'échange des préfixes dans le laboratoire.
 
-## 5. Définir zones et règles FortiGate
+**Pourquoi cet ordre :** si une interface ou une route manque, un tunnel IPsec et une politique SD-WAN ne peuvent pas compenser une connectivité de base absente. Le contrôle devrait porter sur l'état des interfaces, les voisins, les routes apprises et le chemin de paquets ; les captures ne montrent pas un audit complet de tous les équipements.
 
-La configuration associe des interfaces à une zone SD-WAN, prépare des critères de santé de lien et définit des politiques pare-feu. La capture confirme une **étape de configuration**, pas un basculement réussi.
+## 5. Préparer les politiques FortiGate et la zone SD-WAN
 
-![Capture recadrée de la zone SD-WAN](images/capture-zone-sdwan.png)
+**Réalisé :** associer des interfaces ou tunnels à une zone SD-WAN, définir des règles de pare-feu et préparer la surveillance des liaisons. Une capture du rapport montre l'étape de configuration de la zone.
 
-Avant chaque changement, examiner les routes, l'ordre des règles et les accès autorisés : une règle trop large expose les postes ; une route erronée rompt la connectivité. Après application, contrôler le chemin et l'accès aux autres sites.
+**Pourquoi :** la sélection de lien dépend de l'appartenance des membres à la zone et des politiques de circulation. Avant de modifier une règle, vérifier quels réseaux doivent communiquer ; après la modification, vérifier que les flux utiles passent toujours et que les autres ne sont pas autorisés par erreur.
 
-## 6. Préparer les tunnels IPsec
+![Capture recadrée de la configuration de zone SD-WAN](images/capture-zone-sdwan.png)
 
-Les dernières sections du rapport décrivent `VPN-INET` et `VPN-MPLS`, leurs paramètres de phase 1, phase 2 et interfaces. Les valeurs d'authentification et secrets d'origine sont exclus. Certains choix cryptographiques sont propres à l'exercice et exigent une revue avant tout autre usage.
+**Limite :** la capture ne prouve ni quelle liaison a été réellement choisie pour une application, ni un basculement automatique.
 
-Pour valider chaque tunnel, il faudrait contrôler explicitement son état, les routes échangées et le trafic de bout en bout. Le rapport donne surtout des écrans de *configuration*, sans mesure indépendante de stabilité des deux tunnels.
+## 6. Préparer les tunnels IPsec sur les deux chemins
 
-## 7. Exécuter les tests documentés
+**Réalisé :** le rapport présente les paramètres de phase 1, phase 2 et interfaces des tunnels `VPN-INET` et `VPN-MPLS`. Les paramètres d'authentification et la clé d'essai du PDF ne sont pas repris ici.
 
-La partie « Tests de connectivité » présente des réponses ICMP pour un VPC vers une passerelle, un VPC vers un routeur et des échanges entre routeurs. Elles prouvent l'accessibilité des cibles testées à cet instant, sans démontrer le chemin d'une application entre tous les LAN distants.
+**Pourquoi :** deux transports n'ont pas les mêmes garanties ; les tunnels servent à définir la communication inter-sites souhaitée. Il faudrait contrôler séparément l'état de chacun, les routes associées et une communication de bout en bout avant d'affirmer que les deux chemins sont opérationnels en toute circonstance.
 
-## 8. Examiner le basculement sans surestimer le résultat
+**Précaution :** certaines propositions cryptographiques sont propres au TP et doivent être revues selon les normes en vigueur avant toute réutilisation. Le rapport contient principalement des écrans de configuration, sans mesure indépendante de stabilité de chaque tunnel.
 
-Le secours MPLS/Internet est un **objectif**. Pour le valider, il resterait à enregistrer le chemin initial, couper un seul lien dans la maquette, observer le membre SD-WAN et les routes, mesurer l'interruption applicative, restaurer le lien et vérifier le retour. Le rapport ne contient pas ces mesures : aucune durée de convergence ou de disponibilité n'est revendiquée.
+## 7. Vérifier la connectivité qui figure dans le rapport
 
-## Résultat pour un recruteur
+Les captures de la partie « Tests de connectivité » montrent des réponses ICMP entre un VPC et une passerelle, entre un VPC et un routeur, ainsi qu'entre des routeurs. Nous avons utilisé ces essais pour contrôler des segments de la topologie après les configurations.
 
-Le travail illustre conception multi-sites, configuration de transport/routage, zone SD-WAN, tunnels IPsec de laboratoire et premiers tests de connectivité. La suite est une matrice de tests inter-sites et de panne reproductible, avec captures des routes, de l'état des tunnels et mesures chiffrées.
+**Ce que cela prouve :** les cibles répondent à cet instant. **Ce que cela ne prouve pas :** le chemin choisi pour chaque application, la communication entre tous les LAN distants, l'état de chaque tunnel en continu ou la qualité d'une bascule.
+
+## 8. Définir la validation manquante pour le secours WAN
+
+La démarche de test à compléter consiste à relever le chemin et l'application au départ, couper **un seul lien**, observer la zone SD-WAN, les routes et l'état des tunnels, mesurer l'interruption, puis restaurer le lien et vérifier le retour. Répéter pour l'autre chemin et consigner les échecs.
+
+**Pourquoi :** une maquette capable de répondre aux ping peut encore perdre une session ou ne jamais utiliser le chemin de secours. Le rapport ne publie pas cette séquence ni de temps de convergence ; la haute disponibilité demeure donc une hypothèse d'architecture à tester.
+
+## Résultat vérifiable
+
+Conception d'un WAN virtuel multi-sites, premiers réglages de routage/transport, zone SD-WAN, préparation des tunnels et connectivité ICMP sur certains chemins. Les performances, le basculement et la disponibilité applicative restent à mesurer. Le PDF original, qui demeure dans ce dépôt, contient des détails de laboratoire à revoir avant diffusion.

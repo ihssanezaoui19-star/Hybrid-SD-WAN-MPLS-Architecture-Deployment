@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="410" viewBox="0 0 960 410" role="img" aria-labelledby="title desc">
+  <title id="title">Maquette WAN hybride MPLS et Internet</title>
+  <desc id="desc">Hub central et trois sites distants dans EVE-NG, avec deux chemins MPLS et Internet prévus pour chaque site.</desc>
+  <rect width="960" height="410" rx="22" fill="#0b1626"/>
+  <text x="34" y="45" fill="#f4f8ff" font-family="Arial,sans-serif" font-size="25" font-weight="700">WAN hybride · topologie de laboratoire</text>
+  <text x="34" y="74" fill="#a8bacd" font-family="Arial,sans-serif" font-size="15">Configuration étudiée dans EVE-NG · aucun résultat de basculement chiffré</text>
+  <path d="M482 179 L245 280 M482 179 L480 280 M482 179 L715 280" fill="none" stroke="#5de0bb" stroke-width="8" stroke-linecap="round"/>
+  <path d="M482 179 Q293 175 245 280 M482 179 L492 280 M482 179 Q674 172 715 280" fill="none" stroke="#7aabef" stroke-width="3" stroke-dasharray="10 9"/>
+  <rect x="369" y="102" width="226" height="97" rx="14" fill="#1d3148" stroke="#74ccb2" stroke-width="2"/>
+  <text x="482" y="137" text-anchor="middle" fill="#f5f9ff" font-family="Arial,sans-serif" font-size="22" font-weight="700">Hub</text>
+  <text x="482" y="169" text-anchor="middle" fill="#b9d0e0" font-family="Arial,sans-serif" font-size="15">FortiGate · routeur virtuel</text>
+  <g fill="#183044" stroke="#4d92c0" stroke-width="2">
+    <rect x="135" y="279" width="220" height="91" rx="13"/><rect x="370" y="279" width="220" height="91" rx="13"/><rect x="605" y="279" width="220" height="91" rx="13"/>
+  </g>
+  <g fill="#f6f9ff" font-family="Arial,sans-serif" font-weight="700" font-size="18" text-anchor="middle"><text x="245" y="316">Site A</text><text x="480" y="316">Site B</text><text x="715" y="316">Site C</text></g>
+  <g fill="#c0d4e5" font-family="Arial,sans-serif" font-size="14" text-anchor="middle"><text x="245" y="343">FortiGate · routeur · VPC</text><text x="480" y="343">FortiGate · routeur · VPC</text><text x="715" y="343">FortiGate · routeur · VPC</text></g>
+  <rect x="676" y="30" width="16" height="8" rx="4" fill="#5de0bb"/><text x="702" y="39" fill="#bfdfd4" font-family="Arial,sans-serif" font-size="13">MPLS</text>
+  <path d="M767 34 h20" stroke="#7aabef" stroke-width="3" stroke-dasharray="5 4"/><text x="799" y="39" fill="#bcd0ed" font-family="Arial,sans-serif" font-size="13">Internet / IPsec</text>
+</svg>

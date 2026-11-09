@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg class="architecture-svg" width="1200" height="635" viewBox="0 0 1200 635" role="img" aria-label="WAN hybride · routage, tunnels et tests" xmlns="http://www.w3.org/2000/svg">
+<style>
+svg{background:#fff;font-family:Arial,Helvetica,sans-serif}
+.arch-zone rect{fill:#f4f8fa;stroke:#b9ccd7;stroke-width:1.5;stroke-dasharray:6 5}
+.arch-zone-hostile rect{fill:#fff3f0;stroke:#f0b9af}
+.arch-zone-observe rect{fill:#edf8f8;stroke:#a9d9da}
+.arch-zone-planned rect{fill:#fbf7ee;stroke:#d6c9aa}
+.arch-zone text{font:500 15px 'DejaVu Sans Mono',monospace;fill:#305777}
+.arch-edge{fill:none;stroke:#829cad;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+.arch-edge-hostile{stroke:#e44c3d}
+.arch-edge-telemetry{stroke:#0998a0;stroke-dasharray:6 5}
+.arch-edge-planned{stroke:#b48a54;stroke-dasharray:6 5}
+.arch-marker-flow path{fill:#829cad}
+.arch-marker-hostile path{fill:#e44c3d}
+.arch-marker-telemetry path{fill:#0998a0}
+.arch-marker-planned path{fill:#b48a54}
+.arch-card-face{fill:#fff;stroke:#bed0dc;stroke-width:1.6}
+.arch-card-dark .arch-card-face{fill:#0e2738;stroke:#0e2738}
+.arch-card-observe .arch-card-face{stroke:#04959e;stroke-width:1.9}
+.arch-card-risk .arch-card-face{stroke:#e2b2aa}
+.arch-card-planned .arch-card-face{stroke:#bc9b66;stroke-dasharray:6 5}
+.arch-icon-disc{fill:#e2ecf2}
+.arch-card-risk .arch-icon-disc{fill:#ffe2dc}
+.arch-card-observe .arch-icon-disc{fill:#d9f1f0}
+.arch-card-dark .arch-icon-disc{fill:#355062}
+.arch-card-planned .arch-icon-disc{fill:#f4ead3}
+.arch-icon{font:700 13px Arial,sans-serif;fill:#12394e}
+.arch-card-risk .arch-icon{fill:#e44c3d}
+.arch-card-observe .arch-icon{fill:#047f88}
+.arch-card-dark .arch-icon{fill:#fff}
+.arch-title{font:700 17px Arial,sans-serif;fill:#071d30}
+.arch-card-dark .arch-title{fill:#fff}
+.arch-sub{font:12px 'DejaVu Sans Mono',monospace;fill:#3d6383}
+.arch-card-dark .arch-sub{fill:#91cafa}
+.arch-step-disc{fill:#0b283c}
+.arch-step{fill:#fff;font:700 11px 'DejaVu Sans Mono',monospace}
+.arch-edge-label{fill:#087e88;font:12px 'DejaVu Sans Mono',monospace}
+</style>
+
+          <defs><marker id="arch-arrow-04-flow" class="arch-marker-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z"/></marker><marker id="arch-arrow-04-hostile" class="arch-marker-hostile" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z"/></marker><marker id="arch-arrow-04-telemetry" class="arch-marker-telemetry" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z"/></marker><marker id="arch-arrow-04-planned" class="arch-marker-planned" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z"/></marker></defs>
+          <g class="arch-zone arch-zone-neutral"><rect x="18" y="64" width="272" height="544" rx="16"/><text x="38" y="95">Sites EVE-NG</text></g><g class="arch-zone arch-zone-neutral"><rect x="314" y="64" width="272" height="544" rx="16"/><text x="334" y="95">Transport</text></g><g class="arch-zone arch-zone-neutral"><rect x="610" y="64" width="272" height="544" rx="16"/><text x="630" y="95">Politiques WAN</text></g><g class="arch-zone arch-zone-observe"><rect x="906" y="64" width="276" height="544" rx="16"/><text x="926" y="95">Vérification</text></g>
+          <g class="arch-edges"><path class="arch-edge arch-edge-flow" d="M266 195 H336" marker-end="url(#arch-arrow-04-flow)"/><path class="arch-edge arch-edge-flow" d="M266 405 H336" marker-end="url(#arch-arrow-04-flow)"/><path class="arch-edge arch-edge-flow" d="M562 195 H632" marker-end="url(#arch-arrow-04-flow)"/><path class="arch-edge arch-edge-flow" d="M562 405 H632" marker-end="url(#arch-arrow-04-flow)"/><path class="arch-edge arch-edge-flow" d="M858 195 H928" marker-end="url(#arch-arrow-04-flow)"/><path class="arch-edge arch-edge-planned" d="M858 405 H928" marker-end="url(#arch-arrow-04-planned)"/><path class="arch-edge arch-edge-flow" d="M745 240 V360" marker-end="url(#arch-arrow-04-flow)"/></g>
+          <g class="arch-card arch-card-plain" aria-label="Hub : Le hub fournit un point central dans la maquette multi-sites." transform="translate(40 150)">
+      <rect class="arch-card-face" width="226" height="90" rx="10"/>
+      <circle class="arch-icon-disc" cx="29" cy="34" r="21"/><text class="arch-icon" x="29" y="39" text-anchor="middle">HUB</text>
+      <text class="arch-title"><tspan x="60" y="40">Hub</tspan></text>
+      <text class="arch-sub"><tspan x="17" y="70">Site central simulé</tspan></text>
+      <circle class="arch-step-disc" cx="0" cy="0" r="13"/><text class="arch-step" x="0" y="4" text-anchor="middle">01</text>
+    </g><g class="arch-card arch-card-plain" aria-label="Sites distants : Les sites distants servent aux vérifications de connectivité." transform="translate(40 360)">
+      <rect class="arch-card-face" width="226" height="90" rx="10"/>
+      <circle class="arch-icon-disc" cx="29" cy="34" r="21"/><text class="arch-icon" x="29" y="39" text-anchor="middle">SITE</text>
+      <text class="arch-title"><tspan x="60" y="40">Sites distants</tspan></text>
+      <text class="arch-sub"><tspan x="17" y="70">Postes et passerelles</tspan></text>
+      <circle class="arch-step-disc" cx="0" cy="0" r="13"/><text class="arch-step" x="0" y="4" text-anchor="middle">02</text>
+    </g><g class="arch-card arch-card-plain" aria-label="MPLS / LDP : Le transport MPLS et LDP est préparé dans EVE-NG." transform="translate(336 150)">
+      <rect class="arch-card-face" width="226" height="90" rx="10"/>
+      <circle class="arch-icon-disc" cx="29" cy="34" r="21"/><text class="arch-icon" x="29" y="39" text-anchor="middle">MPLS</text>
+      <text class="arch-title"><tspan x="60" y="40">MPLS / LDP</tspan></text>
+      <text class="arch-sub"><tspan x="17" y="70">Transport configuré</tspan></text>
+      <circle class="arch-step-disc" cx="0" cy="0" r="13"/><text class="arch-step" x="0" y="4" text-anchor="middle">03</text>
+    </g><g class="arch-card arch-card-plain" aria-label="BGP : Les paramètres BGP sont configurés sur les routeurs et FortiGate." transform="translate(336 360)">
+      <rect class="arch-card-face" width="226" height="90" rx="10"/>
+      <circle class="arch-icon-disc" cx="29" cy="34" r="21"/><text class="arch-icon" x="29" y="39" text-anchor="middle">BGP</text>
+      <text class="arch-title"><tspan x="60" y="40">BGP</tspan></text>
+      <text class="arch-sub"><tspan x="17" y="70">Échanges de routes</tspan></text>
+      <circle class="arch-step-disc" cx="0" cy="0" r="13"/><text class="arch-step" x="0" y="4" text-anchor="middle">04</text>
+    </g><g class="arch-card arch-card-dark" aria-label="FortiGate SD-WAN : Les zones et politiques sélectionnent les liens selon la configuration du lab." transform="translate(632 150)">
+      <rect class="arch-card-face" width="226" height="90" rx="10"/>
+      <circle class="arch-icon-disc" cx="29" cy="34" r="21"/><text class="arch-icon" x="29" y="39" text-anchor="middle">FG</text>
+      <text class="arch-title"><tspan x="60" y="40">FortiGate SD-WAN</tspan></text>
+      <text class="arch-sub"><tspan x="17" y="70">Zones et politiques</tspan></text>
+      <circle class="arch-step-disc" cx="0" cy="0" r="13"/><text class="arch-step" x="0" y="4" text-anchor="middle">05</text>
+    </g><g class="arch-card arch-card-plain" aria-label="Tunnels IPsec : Les paramètres des tunnels sont documentés ; leur résilience n’est pas mesurée ici." transform="translate(632 360)">
+      <rect class="arch-card-face" width="226" height="90" rx="10"/>
+      <circle class="arch-icon-disc" cx="29" cy="34" r="21"/><text class="arch-icon" x="29" y="39" text-anchor="middle">VPN</text>
+      <text class="arch-title"><tspan x="60" y="40">Tunnels IPsec</tspan></text>
+      <text class="arch-sub"><tspan x="17" y="70">Paramètres documentés</tspan></text>
+      <circle class="arch-step-disc" cx="0" cy="0" r="13"/><text class="arch-step" x="0" y="4" text-anchor="middle">06</text>
+    </g><g class="arch-card arch-card-observe" aria-label="Tests ICMP : Les captures montrent des réponses ping vers les cibles testées." transform="translate(928 150)">
+      <rect class="arch-card-face" width="226" height="90" rx="10"/>
+      <circle class="arch-icon-disc" cx="29" cy="34" r="21"/><text class="arch-icon" x="29" y="39" text-anchor="middle">OK</text>
+      <text class="arch-title"><tspan x="60" y="40">Tests ICMP</tspan></text>
+      <text class="arch-sub"><tspan x="17" y="70">Connectivité observée</tspan></text>
+      <circle class="arch-step-disc" cx="0" cy="0" r="13"/><text class="arch-step" x="0" y="4" text-anchor="middle">07</text>
+    </g><g class="arch-card arch-card-planned" aria-label="Basculement : La convergence automatique MPLS/Internet reste un objectif à tester." transform="translate(928 360)">
+      <rect class="arch-card-face" width="226" height="90" rx="10"/>
+      <circle class="arch-icon-disc" cx="29" cy="34" r="21"/><text class="arch-icon" x="29" y="39" text-anchor="middle">?</text>
+      <text class="arch-title"><tspan x="60" y="40">Basculement</tspan></text>
+      <text class="arch-sub"><tspan x="17" y="70">Mesure non publiée</tspan></text>
+      <circle class="arch-step-disc" cx="0" cy="0" r="13"/><text class="arch-step" x="0" y="4" text-anchor="middle">08</text>
+    </g>
+        </svg>

@@ -22,6 +22,12 @@ Le rapport compare MPLS, LDP, SD-WAN, tunnels IPsec et routage dynamique ; il d�
 
 ![Topologie simplifiée et anonymisée](images/topologie-anonymisee.svg)
 
+**Schéma actualisé du portfolio (vue publique reconstruite)**
+
+![Chemin détaillé du laboratoire WAN et des tests documentés](images/architecture-detaillee.svg)
+
+Le schéma distingue les réglages et les contrôles publiés des tests de basculement encore manquants. Il ne reproduit ni le plan d’adressage ni les secrets du rapport. [Ouvrir le schéma en grand](images/architecture-detaillee.svg).
+
 ## 4. Préparer les routeurs et le transport
 
 **Réalisé dans les extraits du rapport :** configurer les interfaces des routeurs, les éléments MPLS/LDP et des paramètres de voisinage BGP. Ces étapes établissent les bases du chemin de transport et de l'échange des préfixes dans le laboratoire.

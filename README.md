@@ -22,6 +22,12 @@ Un seul chemin WAN peut rendre les sites indisponibles lorsqu'il tombe. Ajouter 
 
 ![Schéma public simplifié de la maquette](images/topologie-anonymisee.svg)
 
+**Schéma actualisé du portfolio (vue publique reconstruite)**
+
+![Schéma détaillé du WAN hybride, des tunnels et des vérifications](images/architecture-detaillee.svg)
+
+Vue publique reconstruite : sites EVE-NG, MPLS/LDP et BGP, politiques FortiGate SD-WAN, IPsec et tests ICMP. La bascule automatique reste à mesurer ; le pointillé ne représente pas une validation. [Ouvrir le schéma en grand](images/architecture-detaillee.svg).
+
 ## Résultat et limites
 
 La topologie, ses principales configurations et **des échanges ICMP réussis sur les cibles testées** sont documentés. Le rapport ne donne ni séquence reproductible de coupure d'un lien, ni temps de convergence, ni mesure d'une application entre tous les sites : je ne présente donc pas une haute disponibilité démontrée. OSPF est décrit dans l'état de l'art, mais son déploiement complet n'est pas confirmé par les extraits accessibles.
